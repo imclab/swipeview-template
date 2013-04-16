@@ -1,0 +1,154 @@
+<!DOCTYPE HTML> 
+<html>
+<head>
+  <title>Swipe 2</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=8">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/> 
+  <link href='style.css' rel='stylesheet'/>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+
+  <style>
+  /* Swipe 2 required styles */
+  .swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+  }
+  .swipe-wrap {
+    overflow: hidden;
+    position: relative;
+  }
+  .swipe-wrap > div {
+    float:left;
+    width:100%;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .swipe-wrap > div h2 {
+    font-size: 40px;
+    font-weight: normal;
+  }
+
+  .swipe-wrap > div ul {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+  }
+
+  .swipe-wrap ul li {
+    display: block;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .swipe-wrap ul li:last-child {
+    border: 0;
+  }
+
+  /* END required styles */
+  </style>
+
+</head>
+<body>
+  <div id='mySwipe' style='max-width:400px;margin:0 auto' class='swipe'>
+    <div class='swipe-wrap'>
+      <div>
+        <h2>Swipe 0</h3>
+          <ul id="thelist">
+            <li>Pretty row 1</li>
+            <li>Pretty row 2</li>
+            <li>Pretty row 3</li>
+            <li>Pretty row 4</li>
+            <li>Pretty row 5</li>
+            <li>Pretty row 6</li>
+            <li>Pretty row 7</li>
+            <li>Pretty row 8</li>
+            <li>Pretty row 9</li>
+            <li>Pretty row 10</li>
+            <li>Pretty row 11</li>
+            <li>Pretty row 12</li>
+            <li>Pretty row 13</li>
+            <li>Pretty row 14</li>
+            <li>Pretty row 15</li>
+            <li>Pretty row 16</li>
+            <li>Pretty row 17</li>
+            <li>Pretty row 18</li>
+            <li>Pretty row 19</li>
+            <li>Pretty row 20</li>
+            <li>Pretty row 21</li>
+            <li>Pretty row 22</li>
+            <li>Pretty row 23</li>
+            <li>Pretty row 24</li>
+            <li>Pretty row 25</li>
+            <li>Pretty row 26</li>
+            <li>Pretty row 27</li>
+            <li>Pretty row 28</li>
+            <li>Pretty row 29</li>
+            <li>Pretty row 30</li>
+            <li>Pretty row 31</li>
+            <li>Pretty row 32</li>
+            <li>Pretty row 33</li>
+            <li>Pretty row 34</li>
+            <li>Pretty row 35</li>
+            <li>Pretty row 36</li>
+            <li>Pretty row 37</li>
+            <li>Pretty row 38</li>
+            <li>Pretty row 39</li>
+            <li>Pretty row 40</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Swipe 1</h3>
+          <div id="map"></div>
+        </div>
+        <div>
+          <h2>Swipe 2</h3>
+          <b>2</b>
+        </div>
+      </div>
+  </div>
+
+  <div style='text-align:center;padding-top:20px;'>
+    <button onclick='mySwipe.prev()'>prev</button> 
+    <button onclick='mySwipe.next()'>next</button>
+  </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+    <script src='swipe.js'></script>
+    <script>
+      document.getElementById('mySwipe').style.maxWidth = window.innerWidth - 40 + "px";
+
+      // SWIPE with pure JS
+      var elem = document.getElementById('mySwipe');
+      window.mySwipe = Swipe(elem, {
+        startSlide: 1,
+        // auto: 3000,
+        continuous: false,
+        // disableScroll: true,
+        // stopPropagation: true,
+        // callback: function(index, element) {},
+        // transitionEnd: function(index, element) {}
+      });
+
+      var divs = document.querySelectorAll('.swipe-wrap > div ul');
+      for(var i = 0; i < divs.length; i++){
+        divs[i].style.maxHeight = window.innerHeight - 140 + "px";
+      }
+
+      // MAP
+      document.getElementById('map').style.height = window.innerHeight - 140 + "px";
+      var map = L.map('map').setView([51.505, -0.09], 13);
+
+      L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+      }).addTo(map);
+      
+      L.marker([51.5, -0.09]).addTo(map);
+  </script>
+</body>
+</html>
